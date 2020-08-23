@@ -3,24 +3,25 @@ import './grid.css'
 import Node from "./node/node"
 
 import Dijkstra from "../algo/dijkstra"
+import Bfs from "../algo/bfs"
 
 const ROW = 26
 const COL = 70
-const START_NODE_ROW = 12
+const START_NODE_ROW = 13
 const START_NODE_COL = 20
-const FINISH_NODE_ROW = 12
+const FINISH_NODE_ROW = 13
 const FINISH_NODE_COL = 50
 
-export default class Gird extends Component{
-    constructor(){
-        super ()
+export default class Gird extends Component {
+    constructor() {
+        super()
         this.state = {
-            grid:[]
+            grid: []
         }
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         const grid = this.createGrid(ROW, COL);
         this.setState({grid});
     }
@@ -28,9 +29,9 @@ export default class Gird extends Component{
     // Create the whole grid
     createGrid = (row, col) => {
         const grid = [];
-        for(let i = 0 ; i < row ; i++){
+        for (let i = 0; i < row; i++) {
             const row = [];
-            for(let j = 0 ; j < col ; j++){
+            for (let j = 0; j < col; j++) {
                 row.push(this.createNode(i, j));
             }
             grid.push(row);
@@ -40,7 +41,7 @@ export default class Gird extends Component{
 
     // Create each node inside the grid
     createNode = (i, j) => {
-        return{
+        return {
             row: i,
             col: j,
             isStart: i === START_NODE_ROW && j === START_NODE_COL,
@@ -49,80 +50,98 @@ export default class Gird extends Component{
         }
     }
 
-    getDijkstra(){
-        const{grid} = this.state
+    getDijkstra() {
+        const {grid} = this.state
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
         const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL]
         const dijkstra = Dijkstra(grid, startNode, finishNode)
-        this.animateDijkstra(dijkstra[0],dijkstra[1])
-        // this.animatePath(dijkstra[1])
+        this.animateDijkstra(dijkstra[0], dijkstra[1])
     }
 
-    animateDijkstra(dijkstraOrder,pathOrder){
-        for (let i = 0; i< dijkstraOrder.length; i++){
-            if(i === dijkstraOrder.length -1){
+    getBfs() {
+        const {grid} = this.state
+        const startNode = grid[START_NODE_ROW][START_NODE_COL]
+        const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL]
+        const bfs = Bfs(grid, startNode, finishNode)
+        this.animateBfs(bfs[0], bfs[1])
+    }
+
+    animateBfs(bfsOrder, pathOrder) {
+        for (let i = 0; i < bfsOrder.length; i++) {
+            if (i === bfsOrder.length - 1) {
                 setTimeout(() => {
                     this.animatePath(pathOrder)
-                }, 5*i);
-                console.log(1)
+                }, 5 * i);
+            }
+            setTimeout(() => {
+                const node = bfsOrder[i];
+                document.getElementById(`node-${node.row}-${node.col}`).classList.add('isVisitAnimate');
+            }, 5 * i);
+        }
+    }
+
+    animateDijkstra(dijkstraOrder, pathOrder) {
+        for (let i = 0; i < dijkstraOrder.length; i++) {
+            if (i === dijkstraOrder.length - 1) {
+                setTimeout(() => {
+                    this.animatePath(pathOrder)
+                }, 5 * i);
             }
             setTimeout(() => {
                 const node = dijkstraOrder[i];
-                document.getElementById(`node-${node.row}-${node.col}`).classList.add('isVisit');
-            }, 5*i);
-            console.log(0)
+                document.getElementById(`node-${node.row}-${node.col}`).classList.add('isVisitAnimate');
+            }, 5 * i);
         }
     }
 
-    animatePath(pathOrder){
+    animatePath(pathOrder) {
         let last;
-        for (let i = 0; i< pathOrder.length; i++){
+        for (let i = 0; i < pathOrder.length; i++) {
             setTimeout(() => {
                 const node = pathOrder[i];
-                document.getElementById(`node-${node.row}-${node.col}`).classList.add('isPath','isStart');
-                if (i!==0) {
+                document.getElementById(`node-${node.row}-${node.col}`).classList.add('isPath', 'isStart');
+                if (i !== 0) {
                     last.classList.remove("isStart");
                 }
                 last = document.getElementById(`node-${node.row}-${node.col}`)
-            }, 15*i);
+            }, 15 * i);
         }
     }
 
 
-
-    render(){
-        const{grid} = this.state
-        return(
+    render() {
+        const {grid} = this.state
+        return (
             <>
                 <button onClick={() => this.getDijkstra()}>Dijkstra</button>
-                <button>AStar</button>
+                <button onClick={() => this.getBfs()}>Bfs</button>
                 <table>
                     <tbody>
-                        {grid.map((row,rowIndex) => {
-                            return(
-                                <tr key={rowIndex}>
-                                    {row.map((node,nodeIndex)=>{
-                                        const{
-                                            row,
-                                            col,
-                                            isStart,
-                                            isFinish,
-                                            isVisit
-                                        } = node;
-                                        return (
-                                            <Node
-                                                key={nodeIndex}
-                                                row={row}
-                                                col={col}
-                                                isStart={isStart}
-                                                isFinish={isFinish}
-                                                isVisit={isVisit}
-                                            />
-                                        )
-                                    })}
-                                </tr>
-                            )
-                        })}
+                    {grid.map((row, rowIndex) => {
+                        return (
+                            <tr key={rowIndex}>
+                                {row.map((node, nodeIndex) => {
+                                    const {
+                                        row,
+                                        col,
+                                        isStart,
+                                        isFinish,
+                                        isVisit
+                                    } = node;
+                                    return (
+                                        <Node
+                                            key={nodeIndex}
+                                            row={row}
+                                            col={col}
+                                            isStart={isStart}
+                                            isFinish={isFinish}
+                                            isVisit={isVisit}
+                                        />
+                                    )
+                                })}
+                            </tr>
+                        )
+                    })}
                     </tbody>
                 </table>
             </>

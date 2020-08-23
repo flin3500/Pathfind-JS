@@ -5,7 +5,7 @@
 td {
     width: var(--global-width);
     height: var(--global-height);
-    outline: 1px solid white;
+    outline: 1px solid grey;
     /*background-color: rgb(0,100,0);*/
 }
 
@@ -22,7 +22,7 @@ td {
     background-color: cornflowerblue;
 }
 
-.isVisit {
+.isVisitAnimate {
     animation-name: visitedAnimation;
     animation-duration: 0.1s;
     animation-timing-function: ease-out;
@@ -31,6 +31,7 @@ td {
     animation-fill-mode: forwards;
     animation-play-state: running;
 }
+
 
 @keyframes visitedAnimation {
     0% {
