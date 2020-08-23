@@ -1,0 +1,81 @@
+:root {
+    --global-width: 25px;
+    --global-height: 25px;
+}
+td {
+    width: var(--global-width);
+    height: var(--global-height);
+    outline: 1px solid white;
+    /*background-color: rgb(0,100,0);*/
+}
+
+.isStart {
+    background-image: url("../../../man.svg");
+    background-size: var(--global-width) var(--global-height);
+}
+
+.isFinish {
+    background-color: salmon !important;
+}
+
+.water{
+    background-color: cornflowerblue;
+}
+
+.isVisit {
+    animation-name: visitedAnimation;
+    animation-duration: 0.1s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes visitedAnimation {
+    0% {
+        transform: scale(0.3);
+        background-color: rebeccapurple;
+        border-radius: 100%;
+    }
+
+    50% {
+        background-color: rosybrown;
+    }
+
+    75% {
+        transform: scale(1.2);
+        background-color: pink;
+    }
+
+    100% {
+        transform: scale(1);
+        background-color: plum;
+    }
+}
+
+.isPath {
+    animation-name: shortestPath;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes shortestPath {
+    0% {
+        background-color: rgb(255, 254, 106);
+    }
+
+    50% {
+        background-color: rgb(255, 254, 106);
+    }
+
+    100% {
+        background-color: rgb(255, 254, 106);
+    }
+}
+
+
