@@ -11,7 +11,7 @@ export default function Dijkstra(grid, startNode, finishNode){
         // 2. get the closest node
         const closeNode = allNodes.shift()
         // 3. set the closest as isVisit
-        //closeNode.isVisit = true;
+        closeNode.isVisit = true;
         // 4. add this node to dijkstraOrder
         dijkstraOrder.push(closeNode)
         // 5. if find the finish node, break
@@ -19,6 +19,7 @@ export default function Dijkstra(grid, startNode, finishNode){
         // 6. update neighbors distance
         updateNeighbor(closeNode, grid)
     }
+    console.log(dijkstraOrder)
     // 4. get the path
     const finalPath = getPath(finishNode).reverse()
     // 4. return the order
