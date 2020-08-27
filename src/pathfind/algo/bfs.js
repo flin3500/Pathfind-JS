@@ -4,16 +4,15 @@ export default function Bfs(grid, startNode, finishNode){
     let curNodeList = [startNode];
     startNode.isVisit = true;
     // 2. use a count
-    let count = 0;
+    // let count = 0;
     // 2.
-    while(count < getGirdWholeNum(grid)){
+    while(curNodeList.length!==0){
         const curNode = curNodeList.shift();
         bfsOrder.push(curNode);
         if(curNode === finishNode){break}
         updateCurNodeList(curNode, grid, curNodeList);
-        count += 1
+        // count += 1
     }
-    console.log(bfsOrder)
     // 3. get the path
     const finalPath = getPath(finishNode).reverse()
     // 4. return the order
