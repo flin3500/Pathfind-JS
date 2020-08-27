@@ -1,28 +1,18 @@
-export default function Dijkstra(grid, startNode, finishNode){
-    const dijkstraOrder = [];
-    // 1. get all nodeS on the grid and set all distance to Infinity
-    const allNodes = getAllNodes(grid)
-    // 2. set the start distance to be 0
+export default function AStar(grid, startNode, finishNode){
+    const aStarOrder = [];
+    const allNodes = getAllNodes(grid);
     startNode.distance = 0
-    // 3.
+    startNode.g = 0
     while(allNodes.length >0){
-        // 1. sort the allNodes list
         sortAllNodes(allNodes)
-        // 2. get the closest node
         const closeNode = allNodes.shift()
-        // 3. set the closest as isVisit
-        closeNode.isVisit = true;
-        // 4. add this node to dijkstraOrder
-        dijkstraOrder.push(closeNode)
-        // 5. if find the finish node, break
-        if(closeNode === finishNode) break;
-        // 6. update neighbors distance
-        updateNeighbor(closeNode, grid)
+        aStarOrder.push(closeNode);
+        if(closeNode === finishNode)break
+        updateOpenList(closeNode, grid, finishNode);
     }
-    // 4. get the path
+    console.log(aStarOrder)
     const finalPath = getPath(finishNode).reverse()
-    // 4. return the order
-    return [dijkstraOrder,finalPath]
+    return [aStarOrder,finalPath]
 }
 
 
@@ -31,6 +21,7 @@ function getAllNodes(grid){
     for (const row of grid) {
         for (const node of row) {
             node.distance = Infinity
+            node.g = Infinity
             allNodeS.push(node)
         }
     }
@@ -48,19 +39,27 @@ function compare(property){
     }
 }
 
-function updateNeighbor(node, grid){
+function updateOpenList(node, grid, finishNode){
     const neighbors = [];
     const {col, row} = node;
-    if (row > 0)neighbors.push(grid[row - 1][col]);
+    if (row > 0 ) neighbors.push(grid[row - 1][col]);
+    if (col > 0 ) neighbors.push(grid[row][col - 1]);
     if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
-    if (col > 0) neighbors.push(grid[row][col - 1]);
     if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
-    for (const neighbor of neighbors) {
-        if (neighbor.distance > node.distance + 1) {
-            neighbor.distance = node.distance + 1;
+    for (let neighbor of neighbors) {
+        const newDistance = node.g + 1 + manhattanDistance(neighbor, finishNode)
+        if (neighbor.distance > newDistance) {
+            neighbor.g = node.g + 1
+            neighbor.distance = newDistance;
+            // test
+            // document.getElementById(`node-${neighbor.row}-${neighbor.col}`).innerText = neighbor.distance;
             neighbor.previousNode = node;
         }
     }
+}
+
+function manhattanDistance(node,finalNode){
+    return (Math.abs(node.row - finalNode.row)+Math.abs(node.col - finalNode.col));
 }
 
 function getPath(node){
@@ -71,4 +70,3 @@ function getPath(node){
     }
     return finalPath;
 }
-

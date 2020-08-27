@@ -4,10 +4,11 @@ import Node from "./node/node"
 
 import Dijkstra from "../algo/dijkstra"
 import Bfs from "../algo/bfs"
+import AStar from "../algo/astar";
 
 const ROW = 26
 const COL = 70
-const START_NODE_ROW = 13
+const START_NODE_ROW = 5
 const START_NODE_COL = 20
 const FINISH_NODE_ROW = 13
 const FINISH_NODE_COL = 50
@@ -20,14 +21,13 @@ export default class Gird extends Component {
         }
     }
 
-
     componentDidMount() {
         const grid = this.createGrid(ROW, COL);
         this.setState({grid});
     }
 
-    // Create the whole grid
     createGrid = (row, col) => {
+        // Create the whole grid
         const grid = [];
         for (let i = 0; i < row; i++) {
             const row = [];
@@ -39,14 +39,15 @@ export default class Gird extends Component {
         return grid;
     }
 
-    // Create each node inside the grid
     createNode = (i, j) => {
+        // Create single node inside the grid
         return {
             row: i,
             col: j,
             isStart: i === START_NODE_ROW && j === START_NODE_COL,
             isFinish: i === FINISH_NODE_ROW && j === FINISH_NODE_COL,
             isVisit: false,
+            isWater: false
         }
     }
 
@@ -55,7 +56,7 @@ export default class Gird extends Component {
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
         const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL]
         const dijkstra = Dijkstra(grid, startNode, finishNode)
-        this.animateDijkstra(dijkstra[0], dijkstra[1])
+        this.animateAlgo(dijkstra[0], dijkstra[1])
     }
 
     getBfs() {
@@ -63,32 +64,26 @@ export default class Gird extends Component {
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
         const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL]
         const bfs = Bfs(grid, startNode, finishNode)
-        this.animateBfs(bfs[0], bfs[1])
+        this.animateAlgo(bfs[0], bfs[1])
     }
 
-    animateBfs(bfsOrder, pathOrder) {
-        for (let i = 0; i < bfsOrder.length; i++) {
-            if (i === bfsOrder.length - 1) {
+    getAStar() {
+        const {grid} = this.state
+        const startNode = grid[START_NODE_ROW][START_NODE_COL]
+        const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL]
+        const aStar = AStar(grid, startNode, finishNode)
+        this.animateAlgo(aStar[0], aStar[1])
+    }
+
+    animateAlgo(algoOrder, pathOrder) {
+        for (let i = 0; i < algoOrder.length; i++) {
+            if (i === algoOrder.length - 1) {
                 setTimeout(() => {
                     this.animatePath(pathOrder)
                 }, 5 * i);
             }
             setTimeout(() => {
-                const node = bfsOrder[i];
-                document.getElementById(`node-${node.row}-${node.col}`).classList.add('isVisitAnimate');
-            }, 5 * i);
-        }
-    }
-
-    animateDijkstra(dijkstraOrder, pathOrder) {
-        for (let i = 0; i < dijkstraOrder.length; i++) {
-            if (i === dijkstraOrder.length - 1) {
-                setTimeout(() => {
-                    this.animatePath(pathOrder)
-                }, 5 * i);
-            }
-            setTimeout(() => {
-                const node = dijkstraOrder[i];
+                const node = algoOrder[i];
                 document.getElementById(`node-${node.row}-${node.col}`).classList.add('isVisitAnimate');
             }, 5 * i);
         }
@@ -115,6 +110,7 @@ export default class Gird extends Component {
             <>
                 <button onClick={() => this.getDijkstra()}>Dijkstra</button>
                 <button onClick={() => this.getBfs()}>Bfs</button>
+                <button onClick={() => this.getAStar()}>AStar</button>
                 <table>
                     <tbody>
                     {grid.map((row, rowIndex) => {
