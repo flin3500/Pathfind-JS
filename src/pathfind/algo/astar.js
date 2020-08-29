@@ -1,3 +1,10 @@
+/**
+ * @author Lin
+ *
+ * @param grid
+ * @param startNode
+ * @param finishNode
+ */
 export default function AStar(grid, startNode, finishNode){
     const aStarOrder = [];
     let openList = [startNode];
