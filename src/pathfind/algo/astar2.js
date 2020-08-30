@@ -1,3 +1,10 @@
+/**
+ * @author Lin
+ *
+ * @param grid
+ * @param startNode
+ * @param finishNode
+ */
 export default function Astar2(grid, startNode, finishNode){
     const aStarOrder = [];
     const allNodes = getAllNodes(grid);

@@ -1,3 +1,10 @@
+/**
+ * @author Lin
+ *
+ * @param grid
+ * @param startNode
+ * @param finishNode
+ */
 export default function Dijkstra(grid, startNode, finishNode){
     const dijkstraOrder = [];
     // 1. get all nodeS on the grid and set all distance to Infinity
