@@ -30,6 +30,12 @@ export default function AStar(grid, startNode, finishNode){
     return [aStarOrder,finalPath]
 }
 
+/**
+ * @author Lin
+ *
+ * @param grid
+ * @param finalNode
+ */
 function setAllNodes(grid,finalNode){
     for (const row of grid) {
         for (const node of row) {
