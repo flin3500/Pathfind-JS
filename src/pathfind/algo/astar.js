@@ -47,6 +47,11 @@ function setAllNodes(grid,finalNode){
     }
 }
 
+/**
+ * @author Lin
+ *
+ * @param list
+ */
 function sortAllNodes(list){
     list.sort(compare("distance"))
 }
