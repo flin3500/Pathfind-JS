@@ -55,6 +55,12 @@ function setAllNodes(grid,finalNode){
 function sortAllNodes(list){
     list.sort(compare("distance"))
 }
+
+/**
+ * @author Lin
+ *
+ * @param property
+ */
 function compare(property){
     return function(obj1,obj2){
         const value1 = obj1[property];
@@ -63,6 +69,13 @@ function compare(property){
     }
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ * @param grid
+ * @param openList
+ */
 function updateOpenList(node, grid, openList){
     const neighbors = [];
     const {col, row} = node;
