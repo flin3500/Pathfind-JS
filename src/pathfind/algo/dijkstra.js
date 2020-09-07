@@ -32,7 +32,11 @@ export default function Dijkstra(grid, startNode, finishNode){
     return [dijkstraOrder,finalPath]
 }
 
-
+/**
+ * @author Lin
+ *
+ * @param grid
+ */
 function getAllNodes(grid){
     const allNodeS = []
     for (const row of grid) {
@@ -44,9 +48,20 @@ function getAllNodes(grid){
     return allNodeS
 }
 
+/**
+ * @author Lin
+ *
+ * @param list
+ */
 function sortAllNodes(list){
     list.sort(compare("distance"))
 }
+
+/**
+ * @author Lin
+ *
+ * @param property
+ */
 function compare(property){
     return function(obj1,obj2){
         const value1 = obj1[property];
@@ -55,6 +70,12 @@ function compare(property){
     }
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ * @param grid
+ */
 function updateNeighbor(node, grid){
     const neighbors = [];
     const {col, row} = node;
@@ -70,6 +91,11 @@ function updateNeighbor(node, grid){
     }
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ */
 function getPath(node){
     const finalPath = [];
     while(node){
