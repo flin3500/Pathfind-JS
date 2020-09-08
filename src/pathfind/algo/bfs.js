@@ -5,6 +5,7 @@
  * @param startNode
  * @param finishNode
  */
+func
 export default function Bfs(grid, startNode, finishNode){
     const bfsOrder = [];
     // 1. add start node to current node list
