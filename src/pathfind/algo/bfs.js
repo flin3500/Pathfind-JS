@@ -26,10 +26,22 @@ export default function Bfs(grid, startNode, finishNode){
     return [bfsOrder,finalPath]
 }
 
+/**
+ * @author Lin
+ *
+ * @param grid
+ */
 function getGirdWholeNum(grid){
     return (grid.length*grid[0].length);
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ * @param grid
+ * @param curNodeList
+ */
 function updateCurNodeList(node, grid, curNodeList){
     const neighbors = [];
     const {col, row} = node;
@@ -44,6 +56,11 @@ function updateCurNodeList(node, grid, curNodeList){
     }
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ */
 function getPath(node){
     const finalPath = [];
     while(node){
