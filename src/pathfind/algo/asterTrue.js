@@ -22,7 +22,11 @@ export default function AStar(grid, startNode, finishNode){
     return [aStarOrder,finalPath]
 }
 
-
+/**
+ * @author Lin
+ *
+ * @param grid
+ */
 function getAllNodes(grid){
     const allNodeS = []
     for (const row of grid) {
@@ -35,9 +39,19 @@ function getAllNodes(grid){
     return allNodeS
 }
 
+/**
+ * @author Lin
+ *
+ * @param list
+ */
 function sortAllNodes(list){
     list.sort(compare("distance"))
 }
+/**
+ * @author Lin
+ *
+ * @param property
+ */
 function compare(property){
     return function(obj1,obj2){
         const value1 = obj1[property];
@@ -46,6 +60,13 @@ function compare(property){
     }
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ * @param grid
+ * @param finishNode
+ */
 function updateOpenList(node, grid, finishNode){
     const neighbors = [];
     const {col, row} = node;
@@ -65,10 +86,21 @@ function updateOpenList(node, grid, finishNode){
     }
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ * @param finalNode
+ */
 function manhattanDistance(node,finalNode){
     return (Math.abs(node.row - finalNode.row)+Math.abs(node.col - finalNode.col));
 }
 
+/**
+ * @author Lin
+ *
+ * @param node
+ */
 function getPath(node){
     const finalPath = [];
     while(node){
