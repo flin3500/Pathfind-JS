@@ -13,6 +13,7 @@ const START_NODE_COL = 20
 const FINISH_NODE_ROW = 13
 const FINISH_NODE_COL = 50
 
+
 export default class Gird extends Component {
     constructor() {
         super()
@@ -21,6 +22,10 @@ export default class Gird extends Component {
         }
     }
 
+    /**
+     * @author Lin
+     *
+     */
     componentDidMount() {
         const grid = this.createGrid(ROW, COL);
         this.setState({grid});
