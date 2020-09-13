@@ -55,7 +55,10 @@ export default class Gird extends Component {
             isWater: false
         }
     }
-
+    /**
+     * @author Lin
+     *
+     */
     getDijkstra() {
         const {grid} = this.state
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
