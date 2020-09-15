@@ -67,6 +67,10 @@ export default class Gird extends Component {
         this.animateAlgo(dijkstra[0], dijkstra[1])
     }
 
+    /**
+     * @author Lin
+     *
+     */
     getBfs() {
         const {grid} = this.state
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
