@@ -79,6 +79,10 @@ export default class Gird extends Component {
         this.animateAlgo(bfs[0], bfs[1])
     }
 
+    /**
+     * @author Lin
+     *
+     */
     getAStar() {
         const {grid} = this.state
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
