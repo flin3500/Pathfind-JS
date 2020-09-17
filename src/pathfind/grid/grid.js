@@ -91,6 +91,10 @@ export default class Gird extends Component {
         this.animateAlgo(aStar[0], aStar[1])
     }
 
+    /**
+     * @author Lin
+     *
+     */
     animateAlgo(algoOrder, pathOrder) {
         for (let i = 0; i < algoOrder.length; i++) {
             if (i === algoOrder.length - 1) {
