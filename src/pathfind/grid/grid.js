@@ -109,6 +109,10 @@ export default class Gird extends Component {
         }
     }
 
+    /**
+     * @author Lin
+     *
+     */
     animatePath(pathOrder) {
         let last;
         for (let i = 0; i < pathOrder.length; i++) {
