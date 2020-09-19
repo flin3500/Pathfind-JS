@@ -127,7 +127,10 @@ export default class Gird extends Component {
         }
     }
 
-
+    /**
+     * @author Lin
+     *
+     */
     render() {
         const {grid} = this.state
         return (
