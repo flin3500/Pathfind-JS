@@ -1,6 +1,10 @@
 import React,{Component} from 'react'
 import './node.css'
 
+/**
+ * @author Lin
+ *
+ */
 export default class Node extends Component{
     render(){
     const{
