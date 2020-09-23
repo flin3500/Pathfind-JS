@@ -14,6 +14,10 @@ const FINISH_NODE_ROW = 13
 const FINISH_NODE_COL = 50
 
 
+/**
+ * @author Lin
+ *
+ */
 export default class Gird extends Component {
     constructor() {
         super()
