@@ -1,3 +1,31 @@
+# Pathfind 
+
+### 1. Origin
+
+<div align=center>
+   <img src="./img/origin.png" width="100%" height="100%">
+</div>
+
+### 2. Dijkstra
+
+<div align=center>
+   <img src="./img/dijkstra.png" width="100%" height="100%">
+</div>
+
+### 3. BFS
+
+<div align=center>
+   <img src="./img/bfs.png" width="100%" height="100%">
+</div>
+
+### 4. A*
+
+<div align=center>
+   <img src="./img/a*.png" width="100%" height="100%">
+</div>
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

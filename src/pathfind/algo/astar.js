@@ -1,3 +1,4 @@
+
 /**
  * @author Lin
  *
@@ -7,25 +8,17 @@
  */
 export default function AStar(grid, startNode, finishNode){
     const aStarOrder = [];
-    let openList = [startNode];
-    let closeList = [];
-    setAllNodes(grid,finishNode)
-    // need to sort by distance later
+    const allNodes = getAllNodes(grid);
     startNode.distance = 0
-    // need to
     startNode.g = 0
-    while(openList.length >0){
-        sortAllNodes(openList);
-        const curNode = openList.shift();
-
-        closeList.push(curNode)
-        curNode.isVisit = true;
-
-        aStarOrder.push(curNode)
-
-        if(curNode === finishNode) break;
-        updateOpenList(curNode, grid, openList)
+    while(allNodes.length >0){
+        sortAllNodes(allNodes)
+        const closeNode = allNodes.shift()
+        aStarOrder.push(closeNode);
+        if(closeNode === finishNode)break
+        updateOpenList(closeNode, grid, finishNode);
     }
+    console.log(aStarOrder)
     const finalPath = getPath(finishNode).reverse()
     return [aStarOrder,finalPath]
 }
@@ -34,17 +27,17 @@ export default function AStar(grid, startNode, finishNode){
  * @author Lin
  *
  * @param grid
- * @param finalNode
  */
-function setAllNodes(grid,finalNode){
+function getAllNodes(grid){
+    const allNodeS = []
     for (const row of grid) {
         for (const node of row) {
+            node.distance = Infinity
             node.g = Infinity
-            // need to specify h method later, here is manhattan
-            node.h = manhattanDistance(node,finalNode)
-            node.distance = node.g + node.h
+            allNodeS.push(node)
         }
     }
+    return allNodeS
 }
 
 /**
@@ -55,7 +48,6 @@ function setAllNodes(grid,finalNode){
 function sortAllNodes(list){
     list.sort(compare("distance"))
 }
-
 /**
  * @author Lin
  *
@@ -74,29 +66,23 @@ function compare(property){
  *
  * @param node
  * @param grid
- * @param openList
+ * @param finishNode
  */
-function updateOpenList(node, grid, openList){
+function updateOpenList(node, grid, finishNode){
     const neighbors = [];
     const {col, row} = node;
-    if (row > 0)neighbors.push(grid[row - 1][col]);
-    if (col > 0) neighbors.push(grid[row][col - 1]);
-    if (row < grid.length - 1 ) neighbors.push(grid[row + 1][col]);
-    if (col < grid[0].length - 1 ) neighbors.push(grid[row][col + 1]);
+    if (row > 0 ) neighbors.push(grid[row - 1][col]);
+    if (col > 0 ) neighbors.push(grid[row][col - 1]);
+    if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
+    if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
     for (let neighbor of neighbors) {
-        if(neighbor.isVisit === false){
-            if(!findInList(neighbor, openList)) {
-                openList.push(neighbor);
-                neighbor.previousNode = node;
-                neighbor.g = node.g + 1;
-            }
-            else{
-                if(node.g + 1 < neighbor.g){
-                    neighbor.previousNode = node;
-                    neighbor.g = node.g + 1;
-                }
-            }
-
+        const newDistance = node.g + 1 + manhattanDistance(neighbor, finishNode)
+        if (neighbor.distance > newDistance) {
+            neighbor.g = node.g + 1
+            neighbor.distance = newDistance;
+            // test
+            // document.getElementById(`node-${neighbor.row}-${neighbor.col}`).innerText = neighbor.distance;
+            neighbor.previousNode = node;
         }
     }
 }
@@ -109,21 +95,6 @@ function updateOpenList(node, grid, openList){
  */
 function manhattanDistance(node,finalNode){
     return (Math.abs(node.row - finalNode.row)+Math.abs(node.col - finalNode.col));
-}
-
-/**
- * @author Lin
- *
- * @param findNode
- * @param list
- */
-function findInList(findNode, list){
-    for(let node of list){
-        if(node===findNode){
-            return true;
-        }
-    }
-    return false;
 }
 
 /**
