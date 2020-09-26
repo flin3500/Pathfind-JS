@@ -9,7 +9,7 @@
 ### 2. Dijkstra
 
 <div align=center>
-   <img src="./img/dijkstra.png" width="100%" height="100%">
+   <img src="./img/dijkstra.gif" width="100%" height="100%">
 </div>
 
 ### 3. BFS
