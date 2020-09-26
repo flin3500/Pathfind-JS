@@ -15,7 +15,7 @@
 ### 3. BFS
 
 <div align=center>
-   <img src="./img/bfs.png" width="100%" height="100%">
+   <img src="./img/bfs.gif" width="100%" height="100%">
 </div>
 
 ### 4. A*
