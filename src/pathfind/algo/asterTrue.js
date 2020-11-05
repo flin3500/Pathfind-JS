@@ -111,7 +111,12 @@ function manhattanDistance(node,finalNode){
     return (Math.abs(node.row - finalNode.row)+Math.abs(node.col - finalNode.col));
 }
 
-
+/**
+ * @author Lin
+ *
+ * @param findNode
+ * @param list
+ */
 function findInList(findNode, list){
     for(let node of list){
         if(node===findNode){
