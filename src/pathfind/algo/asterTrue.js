@@ -69,13 +69,7 @@ function compare(property){
     }
 }
 
-/**
- * @author Lin
- *
- * @param node
- * @param grid
- * @param openList
- */
+
 function updateOpenList(node, grid, openList){
     const neighbors = [];
     const {col, row} = node;
@@ -126,7 +120,11 @@ function findInList(findNode, list){
     return false;
 }
 
-
+/**
+ * @author Lin
+ *
+ * @param node
+ */
 function getPath(node){
     const finalPath = [];
     while(node){
