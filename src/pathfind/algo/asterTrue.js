@@ -105,12 +105,6 @@ function manhattanDistance(node,finalNode){
     return (Math.abs(node.row - finalNode.row)+Math.abs(node.col - finalNode.col));
 }
 
-/**
- * @author Lin
- *
- * @param findNode
- * @param list
- */
 function findInList(findNode, list){
     for(let node of list){
         if(node===findNode){
@@ -120,11 +114,6 @@ function findInList(findNode, list){
     return false;
 }
 
-/**
- * @author Lin
- *
- * @param node
- */
 function getPath(node){
     const finalPath = [];
     while(node){
