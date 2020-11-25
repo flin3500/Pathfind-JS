@@ -95,12 +95,6 @@ function updateOpenList(node, grid, openList){
     }
 }
 
-/**
- * @author Lin
- *
- * @param node
- * @param finalNode
- */
 function manhattanDistance(node,finalNode){
     return (Math.abs(node.row - finalNode.row)+Math.abs(node.col - finalNode.col));
 }
