@@ -69,7 +69,13 @@ function compare(property){
     }
 }
 
-
+/**
+ * @author Lin
+ *
+ * @param node
+ * @param grid
+ * @param openList
+ */
 function updateOpenList(node, grid, openList){
     const neighbors = [];
     const {col, row} = node;
