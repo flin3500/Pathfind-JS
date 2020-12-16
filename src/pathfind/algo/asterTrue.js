@@ -118,7 +118,11 @@ function findInList(findNode, list){
     }
     return false;
 }
-
+/**
+ * @author Lin
+ *
+ * @param node
+ */
 function getPath(node){
     const finalPath = [];
     while(node){
